@@ -1,0 +1,191 @@
+# 🔎 Why We Use These Payload Types
+
+Understanding *when* and *why* each payload works is more important than memorizing the payload itself. Below is a breakdown of the purpose behind each category.
+
+---
+
+## 1. XSS (Cross-Site Scripting)
+**Why we use it:**  
+To execute JavaScript inside a user’s browser. XSS lets an attacker steal cookies, tokens, session info, modify pages, or perform actions as the victim.
+
+**Typical findings:**  
+- Unescaped user input  
+- Vulnerable HTML attributes  
+- Broken CSP  
+
+---
+
+## 2. SQL Injection
+**Why we use it:**  
+To manipulate database queries when inputs are inserted directly into SQL without sanitization.
+
+**What it achieves:**  
+- Authentication bypass  
+- Extracting all database data  
+- Destroying or modifying tables  
+
+---
+
+## 3. Command Injection
+**Why we use it:**  
+When the server takes user input and passes it into OS commands. Command injection gives full system control.
+
+**What it leads to:**  
+- Reverse shells  
+- Reading sensitive files  
+- Full server takeover  
+
+---
+
+## 4. LFI (Local File Inclusion)
+**Why we use it:**  
+To read system files or escalate to RCE by including unintended files.
+
+**Common goals:**  
+- Read `/etc/passwd`  
+- Leak source code  
+- Convert LFI → RCE via log poisoning  
+
+---
+
+## 5. RFI (Remote File Inclusion)
+**Why we use it:**  
+To force the server to load attacker-hosted code.
+
+**Used for:**  
+- Dropping a remote shell  
+- Running malicious PHP  
+
+---
+
+## 6. SSTI (Server-Side Template Injection)
+**Why we use it:**  
+Template engines like Jinja, Twig, EJS evaluate expressions → payloads give access to backend objects.
+
+**Why it's powerful:**  
+- Often leads to direct RCE  
+- Can escalate privileges  
+- Can bypass WAFs  
+
+---
+
+## 7. CSRF
+**Why we use it:**  
+Victim’s browser automatically sends cookies → meaning you can trick them into doing actions.
+
+**We use CSRF to:**  
+- Change email/password  
+- Delete accounts  
+- Transfer funds  
+
+---
+
+## 8. Open Redirect
+**Why we use it:**  
+To redirect users to malicious websites or chain into OAuth token theft.
+
+---
+
+## 9. Deserialization Attacks
+**Why:**  
+Apps trust serialized objects → dangerous. You can inject objects that execute code during deserialization.
+
+**Used to:**  
+- Trigger RCE  
+- Trigger logic bombs  
+
+---
+
+## 10. Path Traversal
+**Why we use it:**  
+Web servers often restrict access, but improper validation allows escaping directories.
+
+**Use cases:**  
+- Read sensitive system files  
+- Steal configuration files  
+
+---
+
+## 11. XXE
+**Why we use it:**  
+XML parsers allow external entities → attackers load files or perform SSRF.
+
+**Leads to:**  
+- File read  
+- SSRF  
+- DoS  
+
+---
+
+## 12. SSRF
+**Why we use it:**  
+To make the **server** send requests instead of you. It bypasses firewalls and reaches internal hosts.
+
+**Powerful because:**  
+- Access internal admin panels  
+- Hit cloud metadata endpoints  
+- Port scan internal network  
+
+---
+
+## 13. HTTP Request Smuggling
+**Why we use it:**  
+Attack load balancers, proxies, and backend servers by confusing HTTP parsers.
+
+**Results in:**  
+- Cache poisoning  
+- Credential leakage  
+- Bypassing authentication  
+
+---
+
+## 14. Auth Bypass Payloads
+**Why we use them:**  
+To exploit logic flaws or weak token validation.
+
+---
+
+## 15. NoSQL Injection
+**Why we use it:**  
+NoSQL often trusts JSON input → payloads alter queries or bypass auth.
+
+---
+
+## 16. JWT Manipulation
+**Why:**  
+Weak secrets and insecure algs allow forging tokens.
+
+---
+
+## 17. API Fuzzing Payloads
+**Why:**  
+APIs break easily when given unexpected input.
+
+**Discovery goals:**  
+- Logic flaws  
+- Type confusion  
+- Crashes  
+
+---
+
+## 18. Unicode Bypass Payloads
+**Why we use them:**  
+To evade WAFs or filters by encoding the payload indirectly.
+
+---
+
+## 19. ReDoS
+**Why:**  
+Huge strings break regex engines → Denial of Service.
+
+---
+
+## 20. File Upload Bypass
+**Why:**  
+File uploads are one of the easiest paths to RCE when filtering is weak.
+
+**We use it to:**  
+- Upload shells  
+- Bypass magic byte checks  
+- Do polyglot payloads  
+
